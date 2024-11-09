@@ -43,7 +43,7 @@ class L2022211891_8_Test {
                 {'0', '0', '1', '0', '0'},
                 {'0', '0', '0', '1', '1'}
         };
-        int expected = 2;
+        int expected = 3;
         assertEquals(expected, solution.numIslands(grid));
     }
 
