@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.ClassMapper">
+
+    <!-- 条件分页查询 -->
+    <select id="list" resultType="com.itheima.pojo.myClass">
+        select * from classes
+        <where>
+            <if test="classname != null and classname != ''">
+                classname like concat('%',#{classname},'%')
+            </if>
+            <if test="begin != null and end != null">
+                and enddate between #{begin} and #{end}
+            </if>
+        </where>
+        order by id desc
+    </select>
+
+
+    <update id="update">
+        update classes
+        <set>
+            <if test="classname != null and classname != ''">
+                classname = #{classname},
+            </if>
+            <if test="classnum != null and classnum != ''">
+                classnum = #{classnum},
+            </if>
+            <if test="startdate != null">
+                startdate = #{startdate},
+            </if>
+            <if test="enddate != null">
+                enddate = #{enddate},
+            </if>
+            <if test="teacher != null and teacher != ''">
+                teacher = #{teacher},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

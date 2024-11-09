@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.SubArrMapper">
+
+    <!-- 条件分页查询 -->
+    <select id="list" resultType="com.itheima.pojo.SubArr">
+        select * from subarr
+        <where>
+            <if test="subjectname != null and subjectname != ''">
+                subjectname like concat('%',#{subjectname},'%')
+            </if>
+            <if test="techername != null and techername != ''">
+                and techername like concat('%',#{techername},'%')
+            </if>
+            <if test="classname != null and classname != ''">
+                and classname like concat('%',#{classname},'%')
+            </if>
+        </where>
+        order by updateTime desc
+    </select>
+
+
+    <update id="update">
+        update subarr
+        <set>
+            <if test="subjectname != null and subjectname != ''">
+                subjectname = #{subjectname},
+            </if>
+            <if test="techername != null and techername != ''">
+                techername = #{techername},
+            </if>
+            <if test="classname != null and classname != ''">
+                classname = #{classname},
+            </if>
+            <if test="updateTime != null">
+                updateTime = #{updateTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>
